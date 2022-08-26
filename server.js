@@ -7,7 +7,7 @@ const { readFile, writeFile } = fs.promises;
 const path = require("path");
 const api = require("./routes/notes");
 
-const PORT = process.env.pot || 3001;
+const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
