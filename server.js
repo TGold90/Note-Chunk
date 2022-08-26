@@ -1,8 +1,11 @@
+const { v4: uuidv4 } = require("uuid");
+
 const express = require("express");
 const app = express();
 const fs = require("fs");
+const { readFile, writeFile } = fs.promises;
 const path = require("path");
-const api = require("./routes/index");
+const api = require("./routes/notes");
 
 const PORT = process.env.pot || 3001;
 
@@ -18,8 +21,26 @@ app.get("/notes", (req, res) =>
   res.sendFile(path.join(__dirname, "/public/notes.html"))
 );
 
+app.get("/api/notes", async (req, res) => {
+  const dbText = await readFile("db/db.json");
+  const db = JSON.parse(dbText);
+  res.json(db);
+});
+
+app.post("/api/notes", async (req, res) => {
+  const note = {
+    title: req.body.title,
+    text: req.body.text,
+    id: uuidv4(),
+  };
+  const dbText = await readFile("db/db.json");
+  const db = JSON.parse(dbText);
+  db.push(note);
+  const dbData = await writeFile("db/db.json", JSON.stringify(db));
+
+  res.json(note);
+});
+
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT}`)
 );
-
-console.log("Hi");
