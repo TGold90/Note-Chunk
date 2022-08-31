@@ -37,19 +37,19 @@ app.post("/api/notes", async (req, res) => {
   const dbText = await readFile("db/db.json");
   const db = JSON.parse(dbText);
   db.push(note);
-  const dbData = await writeFile("db/db.json", JSON.stringify(db));
-
+  await writeFile("db/db.json", JSON.stringify(db));
   res.json(note);
 });
 
 app.delete("/api/notes/:id", async (req, res) => {
   const dbText = await readFile("db/db.json");
   const db = JSON.parse(dbText);
-  const { id } = req.params;
-  const deleted = db.find((db) => db.id === id);
-  if (deleted) {
-    db = db.filter((db) => db.id != id);
-  }
+  let { id: deleteID } = req.params;
+  let updatedNotes = db.filter((note) => note.id !== deleteID);
+  console.log(updatedNotes);
+  await writeFile("db/db.json", JSON.stringify(updatedNotes));
+  // db.splice(deleteNote);
+  res.json(updatedNotes);
 });
 
 app.listen(PORT, () =>
