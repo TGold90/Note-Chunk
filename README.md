@@ -14,7 +14,7 @@ On loading the notes page, the left side of the screen will populate with curren
 
 - [Link to Deployed Application on Heroku](https://notechunk-ferriswheel.herokuapp.com/)
 
-- [Screenshots] 
+- Screenshots 
 ![notechunk-ferriswheel herokuapp com_notes](https://user-images.githubusercontent.com/104692375/187779713-c322c7ea-bb97-4290-a3d0-9a2813e993d3.png)
 ![notechunk-ferriswheel herokuapp com_](https://user-images.githubusercontent.com/104692375/187779732-71dca1fb-7e54-4cb7-a8e9-b03836619000.png)
 
