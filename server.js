@@ -45,11 +45,10 @@ app.delete("/api/notes/:id", async (req, res) => {
   const dbText = await readFile("db/db.json");
   const db = JSON.parse(dbText);
   let { id: deleteID } = req.params;
-  let updatedNotes = db.filter((note) => note.id !== deleteID);
-  console.log(updatedNotes);
-  await writeFile("db/db.json", JSON.stringify(updatedNotes));
-  // db.splice(deleteNote);
-  res.json(updatedNotes);
+  let newNotes = db.filter((note) => note.id !== deleteID);
+  console.log(newNotes);
+  await writeFile("db/db.json", JSON.stringify(newNotes));
+  res.json(newNotes);
 });
 
 app.listen(PORT, () =>
